@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TEMBEA WEBSITE</title>
+    <style>
+body {
+    background-color: #131316;
+    color: #ffffff;
+    font-family: "montserrat";
+    padding: 0;
+    margin: 0;
+}
+section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 100vh;
+}
+.hidden{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: .5s;
+transition-property: transform, filter;
+}
+.show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="Images/remove background logo.png" alt="logo">   
+        </div>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="#">ABOUT US</a>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="operations.html">Our Operations</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">WHAT WE DO</a>
+                    <ul>
+                        <li><a href="Trash clean-up initiative.html">Cleaning Initiatives</a></li>
+                        <li><a href="Sanitary.html">Women Empowerment</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">JOIN US</a>
+                    <ul>
+                        <li><a href="partner.html">Partner</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">COMMUNITY</a>
+                    <ul>
+                        <li><a href="ourimpact.html">Our Impact</a></li>
+                        <li><a href="partner.html">Donate</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav> 
+        <button class="btnh">DONATE</button> 
+    </header>
+    
+            <h1>About Us</h1>
+            <section class="hidden">
+                <h2>Welcome to Our Company</h2>
+                <p>We are committed to providing the best solutions for our clients. Our team is passionate, innovative, and driven to succeed.</p>
+              </section>
+            
+              <!-- Vision Section -->
+              <section class="hidden">
+                <h2>Our Vision</h2>
+                <p>To be the leading provider of innovative solutions that transform businesses and make a positive impact globally.</p>
+              </section>
+            
+              <!-- Mission Section -->
+              <section class="hidden">
+                <h2>Our Mission</h2>
+                <p>Empowering businesses through state-of-the-art technology, outstanding services, and a commitment to excellence.</p>
+              </section>
+            
+              <!-- Team Section -->
+              <section class="hidden">
+                <h2>Meet Our Team</h2>
+                <p>Our team consists of highly skilled professionals who are experts in their respective fields.</p>
+              </section>
+    
+  
+        
+    
+
+    <div class="footer7">
+        <div class="footer-logo">
+            <img src="./Images/remove background logo.png" alt="Footer Logo">
+        </div>
+        <div class="footer-social">
+            <h1>Social media</h1>
+            <div class="F-icons">
+                <li><a href="#"><i class='bx bxl-instagram-alt'></i></a></li>
+                <li><a href="#"><i class='bx bxl-twitter'></i></a></li>
+                <li><a href="#"><i class='bx bxl-facebook'></i></a></li>
+                <li><a href="#"><i class='bx bxl-linkedin'></i></a></li>
+            </div>
+        </div>
+        <div class="f-links">
+            <h1>Organisation</h1>
+            <a href="index.html">home</a>
+            <a href="about.html">who we are</a>
+            <a href="Trash clean-up initiative.html">what we do</a>
+            <a href="partner.html">join us</a>
+            <a href="ourimpact.html">community</a>
+        </div>
+        <div class="f-contact">
+            <h1>Contact Information</h1>
+            <p>Email: <a href="mailto:oketchbenjamin@gmail.com">oketchbenjamin@gmail.com</a></p>
+            <p>Phone: <a href="tel:0795619356">0704387811/0701453378</a></p>
+            <p>Location: Nairobi, Kibera, Kenya</p>
+        </div>
+        <div class="contact-form">
+            <form action="">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email Address" required>
+                <input type="tel" placeholder="Your Mobile Number" required>
+                <textarea name="" id="" cols="15" rows="5" placeholder="How Can I Help You" required></textarea>
+                <input type="submit" value="Send Message" class="submit" required>
+            </form>
+        </div>
+        <div class="donate-b">
+            <button> <a href="./donation.html"class="donate-b"> DONATE</button></a>
+        </div>
+    </div>
+
+    <script defer src="app.js"></script>
+</body>
+</html>
