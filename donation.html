@@ -1,207 +1,137 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Donate</title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://js.stripe.com/v3/"></script>
-        <style>
-            .hidden { display: none; }
-            .error { color: red; }
-            .success { color: green; }
-        </style>
-    </head>
-    <body>
-        <header>
-            <div class="logo-container">
-                <img src="Images/remove background logo.png" alt="logo">   
-            </div>
-            <nav>
-                <ul id="menu">
-                    <li><a href="index.html">HOME</a></li>
-                    <li>
-                        <a href="#">ABOUT US</a>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="operations.html">Our Operations</a></li>
-                            <li><a href="history.html">Our History</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">WHAT WE DO</a>
-                        <ul>
-                            <li><a href="Trash clean-up initiative.html">Cleaning Initiatives</a></li>
-                            <li><a href="Sanitary.html">Women Empowerment</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">JOIN US</a>
-                        <ul>
-                            <li><a href="partner.html">Partner</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">COMMUNITY</a>
-                        <ul>
-                            <li><a href="ourimpact.html">Our Impact</a></li>
-                            <li><a href="partner.html">Donate</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav> 
-            <button class="btnh">DONATE</button> 
-        </header>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate</title>
     
-    <div class="donate-Q">
-        <a href="./index.html" class="donate-q">Go Back</a>
-    </div>
-    
-    <section class="sc-3" id="help">
-        <div class="head-5">
-            <h1>HELP</h1>
-        </div>
-    
-        <section class="donate reveal" id="donate-form">
-            <h2>Donate</h2>
-            <form id="payment-form" method="post" action="process_payment.php">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="amount">Donation Amount (USD)</label>
-                <input type="number" id="amount" name="amount" min="1" required>
-                
-                <label for="payment-method">Choose Payment Method</label>
-                <select id="payment-method" name="payment-method" required>
-                    <option value="" disabled selected>Select a payment method</option>
-                    <option value="stripe">Credit Card (Stripe)</option>
-                    <option value="mpesa">M-Pesa</option>
-                </select>
-                
-                <div id="stripe-section" class="payment-section hidden">
-                    <label for="card-element">Credit Card</label>
-                    <div id="card-element"></div>
-                    <div id="card-errors" class="error"></div>
-                </div>
-                
-                <div id="mpesa-section" class="payment-section hidden">
-                    <label for="phone">M-Pesa Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Your M-Pesa phone number" required>
-                </div>
-                
-                <button type="submit">Donate Now</button>
-                <div id="response-message"></div>
-            </form>
-        </section>
-    </section>
-    
-    <script>
-        // Stripe integration
-        var stripe = Stripe('your-publishable-key-here');
-        var elements = stripe.elements();
-        var card = elements.create('card');
-        card.mount('#card-element');
-    
-        var form = document.getElementById('payment-form');
-        var paymentMethodSelect = document.getElementById('payment-method');
-        var stripeSection = document.getElementById('stripe-section');
-        var mpesaSection = document.getElementById('mpesa-section');
-        var responseMessage = document.getElementById('response-message');
-        var cardErrors = document.getElementById('card-errors');
-    
-        paymentMethodSelect.addEventListener('change', function() {
-            if (paymentMethodSelect.value === 'stripe') {
-                stripeSection.classList.remove('hidden');
-                mpesaSection.classList.add('hidden');
-            } else if (paymentMethodSelect.value === 'mpesa') {
-                stripeSection.classList.add('hidden');
-                mpesaSection.classList.remove('hidden');
-            } else {
-                stripeSection.classList.add('hidden');
-                mpesaSection.classList.add('hidden');
-            }
-        });
-    
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            responseMessage.textContent = '';
-    
-            var paymentMethod = paymentMethodSelect.value;
-    
-            if (paymentMethod === 'stripe') {
-                stripe.createToken(card).then(function(result) {
-                    if (result.error) {
-                        cardErrors.textContent = result.error.message;
-                    } else {
-                        // Send the token to your server
-                        var token = result.token.id;
-                        var formData = new FormData(form);
-                        formData.append('stripeToken', token);
-    
-                        fetch('/path-to-your-server-endpoint', {
-                            method: 'POST',
-                            body: formData
-                        }).then(function(response) {
-                            return response.json();
-                        }).then(function(responseJson) {
-                            if (responseJson.success) {
-                                responseMessage.textContent = 'Donation successful!';
-                                responseMessage.className = 'success';
-                            } else {
-                                responseMessage.textContent = 'Donation failed: ' + responseJson.message;
-                                responseMessage.className = 'error';
-                            }
-                        }).catch(function(error) {
-                            responseMessage.textContent = 'There was an error processing your request.';
-                            responseMessage.className = 'error';
-                        });
-                    }
-                });
-            } else if (paymentMethod === 'mpesa') {
-                // Handle M-Pesa payment
-                var formData = new FormData(form);
-                fetch('/path-to-your-mpesa-endpoint', {
-                    method: 'POST',
-                    body: formData
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(responseJson) {
-                    if (responseJson.success) {
-                        responseMessage.textContent = 'Donation successful!';
-                        responseMessage.className = 'success';
-                    } else {
-                        responseMessage.textContent = 'Donation failed: ' + responseJson.message;
-                        responseMessage.className = 'error';
-                    }
-                }).catch(function(error) {
-                    responseMessage.textContent = 'There was an error processing your request.';
-                    responseMessage.className = 'error';
-                });
-            }
-        });
-    </script>
-    
-    </body>
-    </html>
-    
-    
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+<
+    <style>
+        
 
-<script src="./APPS/main.js"></script>
-<script>
-    function showMenu() {
-        document.getElementById('nav-link').style.display = 'block';
-        document.querySelector('.fa-bars').style.display = 'none';
-        document.querySelector('.fa-times').style.display = 'block';
-    }
-    function hideMenu() {
-        document.getElementById('nav-link').style.display = 'none';
-        document.querySelector('.fa-bars').style.display = 'block';
-        document.querySelector('.fa-times').style.display = 'none';
-    }
-</script>
+.donate-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+.donate-container h1 {
+    margin-bottom: 20px;
+}
+
+.donate-container p {
+    margin-bottom: 30px;
+    font-size: 18px;
+    color: #555;
+}
+
+.donate-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ff813f;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.donate-button:hover {
+    background-color: #e76b2c;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="Images/remove background logo.png" alt="logo">   
+        </div>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="#">ABOUT US</a>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html#whatwedo">What We Do</a></li>
+                        <li><a href="about.html#theteam">Meet Us</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">GALLERY</a>
+                    <ul>
+                        <li><a href="ourimpact.html">Our Impact</a></li>
+                        <li><a href="ourimpact.html#community">Community</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">JOIN US</a>
+                    <ul>
+                        <li><a href="https://forms.gle/qUX9TutfzMgmGtXQ9" target="_blank">Partner</a></li>
+                        <li><a href="donation.html">Donate</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </nav> 
+        <a class="bth" href="https://www.buymeacoffee.com/tembeakibera"><button class="btnh"><b>DONATE</b></button> </a>
+    </header>
+    <div class="donate-container">
+        <h1>Support Our Cause</h1>
+        <p>Your donations help us continue our mission. Thank you for your support!</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tembeakibera" data-color="#5F7FFF" data-emoji=""  data-font="Poppins" data-text="DONATE" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+        <img src="bmc_qr.png" alt="qr code" style="height: 400px;">
+    </div>
+    <footer>
+        <div class="main-content">
+          <div class="left box">
+            <h2>About us</h2>
+            <div class="content">
+              <p>Our community programs have significantly improved local livelihoods and fostered resilience. We work closely with community leaders to address their most pressing needs and promote sustainable development.
+            </p>
+              <div class="social">
+                <a href="https://www.facebook.com/profile.php?id=61566549923197"><span class="fab fa-facebook-f"></span></a>
+                
+              </div>
+            </div>
+          </div>
+          <div class="center box">
+           <div class="content">
+              <div class="place">
+                <span class="fas fa-map-marker-alt"></span>
+                <span class="text">Kibera,Nairobi- Kenya</span>
+              </div>
+              <div class="phone">
+                <span class="fas fa-phone-alt"></span>
+                <a href="tel:+254704387811"><span class="text">+254 704 387 811<br>   +254 701 453 378</span></a>
+              </div>
+              <div class="email">
+                <span class="fas fa-envelope"></span>
+            <a href="mailto:tembeakibera37@gmail.com"><span class="text">tembeakibera37@gmail.com</span></a>
+              </div>
+              <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tembeakibera" data-color="#5F7FFF" data-emoji=""  data-font="Poppins" data-text="DONATE" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+            </div>
+          </div>
+          <div class="right box">
+            <h2>Contact us</h2>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfGBsbiY41ZLV5K6hmeX2GDEMBGLFflplrwJQVX_pQ-vawf3Q/viewform?embedded=true" width="100%" height="90%" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <center>
+            <span class="credit">Created By <a href="#">CodeCrucible</a> | </span>
+            <span class="far fa-copyright"></span><span> 2024 All rights reserved.</span>
+          </center>
+        </div>
+      </footer>
+      <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="tembeakibera" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 </body>
 </html>
-
