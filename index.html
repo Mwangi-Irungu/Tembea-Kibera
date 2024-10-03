@@ -7,6 +7,270 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <link rel="icon" type="image/x-icon" href="Images/remove background logo.png">
+    <style>
+.toggle,
+[id^=drop] {
+	display: none;
+}
+
+/* Giving a background-color to the nav container. */
+nav { 
+	margin:0;
+	padding: 0;
+	background-color: #254441;
+  text-align: center;
+  align-items: center;
+  z-index: 1;
+}
+
+#logo {
+	display: block;
+	padding: 0 30px;
+	float: left;
+	font-size:20px;
+	line-height: 60px;
+}
+
+/* Since we'll have the "ul li" "float:left"
+ * we need to add a clear after the container. */
+
+nav:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+
+/* Removing padding, margin and "list-style" from the "ul",
+ * and adding "position:reltive" */
+nav ul {
+	align-items: center;
+	padding:0;
+	margin:0;
+	list-style: none;
+	position: relative;
+	}
+	
+/* Positioning the navigation items inline */
+nav ul li {
+	margin: 0px;
+	display:inline-block;
+	
+	background-color: #254441;
+	}
+
+/* Styling the links */
+nav a {
+	display:block;
+	padding:14px 20px;	
+	color:#FFF;
+	font-size:17px;
+	text-decoration:none;
+}
+
+
+nav ul li ul li:hover { background: #000000; }
+
+/* Background color change on Hover */
+nav a:hover { 
+	background-color: #000000; 
+}
+
+/* Hide Dropdowns by Default
+ * and giving it a position of absolute */
+nav ul ul {
+	display: none;
+	position: absolute; 
+	/* has to be the same number as the "line-height" of "nav a" */
+	top: 60px; 
+}
+	
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+	display:inherit;
+}
+	
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	width:170px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+
+/* Second, Third and more Tiers	
+ * We move the 2nd and 3rd etc tier dropdowns to the left
+ * by the amount of the width of the first tier.
+*/
+nav ul ul ul li {
+	position: relative;
+	top:-60px;
+	/* has to be the same number as the "width" of "nav ul ul li" */ 
+	left:170px; 
+}
+
+	
+/* Change ' +' in order to change the Dropdown symbol */
+li > a:after { content:  ' +'; }
+li > a:only-child:after { content: ''; }
+
+
+/* Media Queries
+--------------------------------------------- */
+
+@media all and (max-width : 768px) {
+
+
+	nav {
+		margin: 0;
+	}
+
+	/* Hide the navigation menu by default */
+	/* Also hide the  */
+	.toggle + a,
+	.menu {
+		display: none;
+	}
+
+	/* Stylinf the toggle lable */
+	.toggle {
+		display: block;
+		background-color: #254441;
+		padding:14px 20px;	
+		color:#FFF;
+		font-size:17px;
+		text-decoration:none;
+		border:none;
+	}
+
+	.toggle:hover {
+		background-color: #000000;
+	}
+
+	/* Display Dropdown when clicked on Parent Lable */
+	[id^=drop]:checked + ul {
+		display: block;
+	}
+
+	/* Change menu item's width to 100% */
+	nav ul li {
+		display: block;
+		width: 100%;
+		}
+
+	nav ul ul .toggle,
+	nav ul ul a {
+		padding: 0 40px;
+	}
+
+	nav ul ul ul a {
+		padding: 0 80px;
+	}
+
+	nav a:hover,
+ 	nav ul ul ul a {
+		background-color: #000000;
+	}
+  
+	nav ul li ul li .toggle,
+	nav ul ul a,
+  nav ul ul ul a{
+		padding:14px 20px;	
+		color:#FFF;
+		font-size:17px; 
+	}
+  
+  
+	nav ul li ul li .toggle,
+	nav ul ul a {
+		background-color: #212121; 
+	}
+
+	/* Hide Dropdowns by Default */
+	nav ul ul {
+		float: none;
+		position:static;
+		color: #ffffff;
+		/* has to be the same number as the "line-height" of "nav a" */
+	}
+		
+	/* Hide menus on hover */
+	nav ul ul li:hover > ul,
+	nav ul li:hover > ul {
+		display: none;
+	}
+		
+	/* Fisrt Tier Dropdown */
+	nav ul ul li {
+		display: block;
+		width: 100%;
+	}
+
+	nav ul ul ul li {
+		position: static;
+		/* has to be the same number as the "width" of "nav ul ul li" */ 
+
+	}
+
+}
+
+@media all and (max-width : 330px) {
+
+	nav ul li {
+		display:block;
+		width: 94%;
+	}
+
+}
+.container2 {
+            display: flex;
+            padding: 50px;
+            justify-content: space-between;
+        }
+
+        .contect2 {
+            max-width: 600px;
+            margin-right: 20px;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+            width: 500px;
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: 0.5s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+        }
+        .container2 {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contect2 {
+                margin-bottom: 30px;
+                max-width: 100%;
+            }
+
+            .carousel-container {
+                width: 100%;
+            }
+
+            .carousel-slide img {
+                width: 100%;
+            }
+        
+
+        @media (max-width: 500px) {
+            .logo-container img {
+                width: 100px;
+            }
+          }
+    </style>
 </head>
 <body>
     <header>
@@ -14,32 +278,43 @@
             <img src="Images/remove background logo.png" alt="logo">   
         </div>
         <nav>
-            <ul id="menu">
-                <li><a href="index.html">HOME</a></li>
-                <li>
-                    <a href="#">ABOUT US</a>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="about.html#whatwedo">What We Do</a></li>
-                        <li><a href="about.html#theteam">Meet Us</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">GALLERY</a>
+          <label for="drop" class="toggle">Menu</label>
+          <input type="checkbox" id="drop" />
+              <ul class="menu">
+                  <li><a href="index.html">Home</a></li>
+                  <li>
+                      <!-- First Tier Drop Down -->
+                      <label for="drop-1" class="toggle">About Us +</label>
+                      <a href="about.html">About Us</a>
+                      <input type="checkbox" id="drop-1"/>
+                      <ul>
+                          <li><a href="about.html">About Us</a></li>
+                          <li><a href="about.html#whatwedo">What We Do</a></li>
+                          <li><a href="about.html#theteam">Meet Us</a></li>
+                      </ul> 
+  
+                  </li>
+                  <li>
+
+                    <label for="drop-2" class="toggle">Gallery +</label>
+                    <a href="ourimpact.html">Gallery</a>
+                    <input type="checkbox" id="drop-2"/>
                     <ul>
                         <li><a href="ourimpact.html">Our Impact</a></li>
                         <li><a href="ourimpact.html#community">Community</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">JOIN US</a>
-                    <ul>
-                        <li><a href="https://forms.gle/qUX9TutfzMgmGtXQ9" target="_blank">Partner</a></li>
-                        <li><a href="donation.html">Donate</a></li>
-                    </ul>
-                </li>
+                        
+                    </ul> 
+                  <li>
+                    <!-- First Tier Drop Down -->
+                <label for="drop-3" class="toggle">Join Us +</label>
+                <a href="https://forms.gle/qUX9TutfzMgmGtXQ9">Join Us</a>
+                <input type="checkbox" id="drop-3"/>
+                <ul>
+                    <li><a href="https://forms.gle/qUX9TutfzMgmGtXQ9">Partner</a></li>
+                    <li><a href="donation.html">Donate</a></li>
+                    <li>
+              </li>
                 
-            </ul>
         </nav> 
         <a class="bth" href="https://www.buymeacoffee.com/tembeakibera"><button class="btnh"><b>DONATE</b></button> </a>
     </header>

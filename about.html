@@ -16,7 +16,7 @@
         .container {
             position: relative;
             width: 100%;
-            max-height: 100vh;
+            
             background-color: #333;
             padding: 50px;
             overflow: hidden;
@@ -40,8 +40,8 @@
  }
  .ol1{
     font-family: "montserrat";
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
  }
  .containerA{
     margin: 0;
@@ -54,11 +54,75 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: consolas;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .card {
+    border-radius: 0px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+  
+  .face {
     position: relative;
+    height: 250px;
     display: flex;
-    justify-content: space-between;
-}
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s;
+  }
+  
+  .face1 {
+    background: #f5f5f5;
+  }
+  
+  .face2 {
+    padding: 20px;
+  }
+  
+  .face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .face h3 {
+    margin: 10px 0;
+  }
+  
+  .content {
+    text-align: center;
+  }
+  
+  .ol1 {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .containerA {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      width: 100%;
+    }
+
+    .face img {
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+    }
+  }
 
 .containerA .card{
     position: relative;
@@ -150,49 +214,92 @@
     background: #333;
     color: #fff;
 }
-.user-name {
-    font-weight: bold;
-    align-items: center;
-    text-align: center;
-}
-.cards {
-  margin-top: 16px;
-  letter-spacing: -.32em;
-}
-.card1 {
-  width: 48%;
-  height: 330px;
-  margin: 1px 1%;
-  letter-spacing: 1.5px;
-  position: relative;
-  display: inline-block;
-}
-.card1:before {
-	content: "";
-	display: block;
-	padding-top: 100%;
-}
-.card1-content {
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  padding: 16px;
-  border-radius: 2px;
-  border: rgba(255,255,255,.3) 1px solid;
-  background: rgba(255,255,255,.3);
-  box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
-  display: table-cell;
-  position: absolute;
-}
+#whatwedo {
+    padding: 40px 0;
+    background: #f9f9f9;
+  }
 
-.card1-name {
-  font-size: 1.125em;
-}
-.card1-description {
-  color: rgba(0,0,0,.53);
-  font-size: .875em;
-}
+  .containerb {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 15px;
+  }
+
+  .user-name h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .card1 {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: 0.3s ease;
+  }
+
+  .card1:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .card1-content {
+    padding: 20px;
+  }
+
+  .card1 h1, .card1 h2 {
+    margin: 0 0 10px;
+  }
+
+  .card1 h1.card1-name {
+    font-size: 1.5em;
+    color: #333;
+  }
+
+  .card1 h2.card1-description {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* Media Query for Responsive Design */
+  @media screen and (max-width: 768px) {
+    .cards-grid {
+      grid-template-columns: 1fr; /* Stack cards into a single column */
+    }
+
+    .card1 {
+      width: 100%;
+    }
+
+    .card1 h1.card1-name {
+      font-size: 1.3em; /* Adjust heading size */
+    }
+
+    .card1 h2.card1-description {
+      font-size: 0.95em; /* Adjust description size */
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .user-name h1 {
+      font-size: 1.5em; /* Adjust section title size */
+    }
+
+    .card1 h1.card1-name {
+      font-size: 1.2em; /* Adjust heading size */
+    }
+
+    .card1 h2.card1-description {
+      font-size: 0.85em; /* Adjust description size */
+    }
+  }
 #section-2 {
 background: linear-gradient(to bottom, #c9bebe 0%,#7d817f 100%) no-repeat;
   /*overflow: hidden;*/
@@ -310,32 +417,43 @@ text-align: center;
             <img src="Images/remove background logo.png" alt="logo">   
         </div>
         <nav>
-            <ul id="menu">
-                <li><a href="index.html">HOME</a></li>
-                <li>
-                    <a href="#">ABOUT US</a>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="about.html#whatwedo">What We Do</a></li>
-                        <li><a href="about.html#theteam">Meet Us</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">GALLERY</a>
+          <label for="drop" class="toggle">Menu</label>
+          <input type="checkbox" id="drop" />
+              <ul class="menu">
+                  <li><a href="index.html">Home</a></li>
+                  <li>
+                      <!-- First Tier Drop Down -->
+                      <label for="drop-1" class="toggle">About Us +</label>
+                      <a href="about.html">About Us</a>
+                      <input type="checkbox" id="drop-1"/>
+                      <ul>
+                          <li><a href="about.html">About Us</a></li>
+                          <li><a href="about.html#whatwedo">What We Do</a></li>
+                          <li><a href="about.html#theteam">Meet Us</a></li>
+                      </ul> 
+  
+                  </li>
+                  <li>
+
+                    <label for="drop-2" class="toggle">Gallery +</label>
+                    <a href="ourimpact.html">Gallery</a>
+                    <input type="checkbox" id="drop-2"/>
                     <ul>
                         <li><a href="ourimpact.html">Our Impact</a></li>
                         <li><a href="ourimpact.html#community">Community</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">JOIN US</a>
-                    <ul>
-                        <li><a href="https://forms.gle/qUX9TutfzMgmGtXQ9" target="_blank">Partner</a></li>
-                        <li><a href="donation.html">Donate</a></li>
-                    </ul>
-                </li>
+                        
+                    </ul> 
+                  <li>
+                    <!-- First Tier Drop Down -->
+                <label for="drop-3" class="toggle">Join Us +</label>
+                <a href="https://forms.gle/qUX9TutfzMgmGtXQ9">Join Us</a>
+                <input type="checkbox" id="drop-3"/>
+                <ul>
+                    <li><a href="https://forms.gle/qUX9TutfzMgmGtXQ9">Partner</a></li>
+                    <li><a href="donation.html">Donate</a></li>
+                    <li>
+              </li>
                 
-            </ul>
         </nav> 
         <a class="bth" href="https://www.buymeacoffee.com/tembeakibera"><button class="btnh"><b>DONATE</b></button> </a>
     </header>
@@ -353,7 +471,7 @@ text-align: center;
                     </div>
                     <div class="face face2">
                         <div class="content">
-                            <p>Tembea Kibera is dedicated to empowering the community of Kibera through various programs and initiatives. Our mission is to create sustainable development and improve the quality of life for residents.</p>
+                            <p style="font-size: medium;">Tembea Kibera is dedicated to empowering the community of Kibera through various programs and initiatives. Our mission is to create sustainable development and improve the quality of life for residents.</p>
                         </div>
                     </div>
                 </div>
@@ -366,7 +484,7 @@ text-align: center;
                     </div>
                     <div class="face face2">
                         <div class="content">
-                            <p>We envision a thriving Kibera where every resident has access to opportunities and resources to improve their lives. Our vision is to foster a strong, resilient community through collaboration and support.</p>
+                            <p style="font-size: medium;">We envision a thriving Kibera where every resident has access to opportunities and resources to improve their lives. Our vision is to foster a strong, resilient community through collaboration and support.</p>
                              
                         </div>
                     </div>
@@ -382,7 +500,7 @@ text-align: center;
                         <div class="content">
                             <p>
                                 <ol class="ol1">
-                                    <li>Transparency and Accounatbility</li>
+                                    <li>Transparency and Accountability</li>
                                     <li>Discipline</li>
                                     <li>
                                         Teamwork
@@ -405,48 +523,57 @@ text-align: center;
         </div>
     </section>
 
-    <section id="whatwedo">
+    <section id="whatwedo" class="containerb">
         <div id="section-2" class="container reveal">
-            <div class="cards">
-                <div class="content">
-                    <div class="user-name">
-                        <h1>What We Do</h1>
-                    </div>
-                <div class="card1">
-                  <div class="card1-content">
-                   <h1 class="card1-name">Community Clean-up Initiatives</h1>
-                    <h2 class="card1-description">We organize regular clean-up drives in Kibera to ensure a cleaner and healthier environment. These initiatives involve local residents and aim to reduce waste and improve living conditions.Our community clean-up drives involve local residents coming together to remove trash from streets, parks, and other public areas. These events are organized regularly to promote a cleaner and healthier environment in Kibera.We partner with local organizations and businesses to enhance our clean-up efforts. These partnerships help provide resources and support for our initiatives, making our impact even greater.</h2>
-                    
-                  </div>
-                </div>
-                <div class="card1">
-                  <div class="card1-content">
-                  <h1 class="card1-name">Sanitary Pads Give-aways</h1>
-                    <h2 class="card1-description">Our sanitary pad giveaway programs focus on providing essential hygiene products to young women and girls in the community, promoting health and dignity.We organize regular events to distribute sanitary pads to women and girls in need within our community. These events help ensure that everyone has access to essential hygiene products.Our educational workshops also focus on menstrual hygiene management, providing information and resources to help individuals manage their health effectively. We also distribute sanitary products during these workshops.
-
-                    </h2>
-                
-                  </div>
-                </div>
-                <div class="card1">
-                  <div class="card1-content">
-                    <h1 class="card1-name">Youth Development programs</h1>
-                    <h2 class="card1-description">We offer various programs aimed at empowering youth through education, training, and mentorship. These programs help young people develop valuable skills and pursue their goals.</h2>
-                    
-                  </div>
-                </div>
-                <div class="card1 is-active">
-                  <div class="card1-content">
-                
-                    <h1 class="card1-name">Educational Workshops</h1>
-                    <h2 class="card1-description">Our educational workshops focus on menstrual hygiene management, providing information and resources to help individuals manage their health effectively. We also distribute sanitary products during these workshops.</h2>
-                    
-                  </div>
+          <div class="content">
+            <div class="user-name">
+              <h1>What We Do</h1>
+            </div>
+      
+            <div class="cards-grid">
+              <!-- Card 1 -->
+              <div class="card1">
+                <div class="card1-content">
+                  <h1 class="card1-name">Community Clean-up Initiatives</h1>
+                  <h2 class="card1-description">
+                    We organize regular clean-up drives in Kibera to ensure a cleaner and healthier environment. These initiatives involve local residents and aim to reduce waste and improve living conditions. We partner with local organizations and businesses to enhance our clean-up efforts, making our impact even greater.
+                  </h2>
                 </div>
               </div>
+      
+              <!-- Card 2 -->
+              <div class="card1">
+                <div class="card1-content">
+                  <h1 class="card1-name">Sanitary Pads Give-aways</h1>
+                  <h2 class="card1-description">
+                    Our sanitary pad giveaway programs focus on providing essential hygiene products to young women and girls in the community, promoting health and dignity. We organize regular events to distribute sanitary pads to those in need, ensuring access to essential hygiene products.
+                  </h2>
+                </div>
+              </div>
+      
+              <!-- Card 3 -->
+              <div class="card1">
+                <div class="card1-content">
+                  <h1 class="card1-name">Youth Development Programs</h1>
+                  <h2 class="card1-description">
+                    We offer various programs aimed at empowering youth through education, training, and mentorship. These programs help young people develop valuable skills and pursue their goals.
+                  </h2>
+                </div>
+              </div>
+      
+              <!-- Card 4 -->
+              <div class="card1">
+                <div class="card1-content">
+                  <h1 class="card1-name">Educational Workshops</h1>
+                  <h2 class="card1-description">
+                    Our educational workshops focus on menstrual hygiene management, providing information and resources to help individuals manage their health effectively. We also distribute sanitary products during these workshops.
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
-
+      </section>
     <section id="theteam">
         <div id="section-3" class="container reveal">
             <h1>MEET US</h1>
